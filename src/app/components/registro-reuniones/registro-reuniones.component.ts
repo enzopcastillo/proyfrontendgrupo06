@@ -34,6 +34,7 @@ export class RegistroReunionesComponent implements OnInit {
   minDate: any;
   reunionValida!: boolean;
   colisionOficina!:boolean;
+  colisionParticipante!:boolean;
 
   constructor(private reunionService: ReunionService, private empleadoServ: EmpleadoService,
     private recursoServ: RecursoService, private notificacionServ: NotificacionService,
@@ -203,72 +204,7 @@ export class RegistroReunionesComponent implements OnInit {
     this.router.navigate(['detalle/reunion', id]);
   }
 
-  /* VALIDACION: colisiones entre oficinas */
-  validacionReunion(){
-    this.compararHoras();
-    if (this.reunionValida == false ){
-      console.log('Error en los horarios.')
-    }
-    this.validarColisionOficina();
-  }
-
-  validarColisionOficina(){
-    this.colisionOficina=false;
-    var reunionesOficina: Array <Reunion>= new Array <Reunion>();
-    //Variables para las comparaciones
-    var [añoReunion, mesReunion, diaReunion]= this.reunion.fecha.split('-');
-    var [horaInicio, minutosInicio]= this.reunion.horaReunion.split(':');
-    var [horaFin, minutosFin]= this.reunion.horaFinalizacion.split(':');
-    
-    //Se traen las reuniones cargadas en la oficina que se asigno a la reunion
-    this.reunionService.getReunionesOficina(this.reunion.oficina._id).subscribe(
-      result=>{
-        Object.assign(reunionesOficina, result);
-        if(reunionesOficina.length ==0){
-          console.log("Reunion en oficina valida, sin reuniones en oficina");
-        }
-        else{
-          //Por cada reunion en la oficina se comparan los datos
-          reunionesOficina.forEach((element:any)=>{
-           
-            var [añoReunionOficina, mesReunionOficina, diaReunionOficina]= element.fecha.split('-');
-             //Se comprueba la fecha de la reunion cargada coicide con la fecha de alguna reunion 
-            if(añoReunion == añoReunionOficina && mesReunion == mesReunionOficina && diaReunion == diaReunionOficina){
-            
-              console.log("Reunion en la oficina el mismo dia");
-
-              //Variables de la reunion de la Oficina
-              var [horaInicioAux, minutosInicioAux]= element.horaReunion.split(':');
-              var [horaFinAux, minutosFinAux]= element.horaFinalizacion.split(':');
-              
-              if((horaInicio >= horaInicioAux && minutosInicio >= minutosInicioAux) && (horaFin <= horaFinAux)){
-                console.log("Horario reunion ingresada esta dentro del horario de otra reunion");
-                this.toastr.error('El horario de la reunion ingresada esta dentro del horario de otra reunion: '+element.nombre, 'Colision oficina');
-                this.colisionOficina=true;
-
-              }else{
-                if((horaInicio <= horaInicioAux || minutosInicio == minutosInicioAux) && (horaFin >= horaFinAux || minutosFin == minutosFinAux)){
-                  console.log("Horario reunion ingresada contiene al horario de otra reunion");
-                  this.toastr.error('El horario de la reunion ingresada contiene al horario de otra reunion: '+element.nombre, 'Colision oficina');
-                  this.colisionOficina=true;
-                }
-                else{
-                  console.log("Reunion en oficina valida");
-                }
-              }
-            }else{
-              console.log("Reunion en oficina valida, no coicide el dia con ninguna reunion");
-            }
-          });
-        }
-        if(this.colisionOficina == false){
-          this.registrarReunion();
-        }
-      },
-      error=>{}
-    );
-  }
-
+ 
   /* NOTIFICACIONES */
   agregarNotificacionEmpleado(){
     this.remitentes = new Array<string>();
@@ -349,5 +285,132 @@ export class RegistroReunionesComponent implements OnInit {
     if(this.reunion.horaReunion >= this.reunion.horaFinalizacion){
       this.reunionValida = false;
     }
+    if (this.reunionValida == false ){
+      console.log('Error en los horarios.')
+      this.toastr.error('', 'Error',{
+        positionClass:'toast-top-left'
+      });
+    }
+    this.validarColisionParticipante();
   }
+  validarColisionParticipante(){ 
+    //Variables para las comparaciones
+    var [añoReunion, mesReunion, diaReunion]= this.reunion.fecha.split('-');
+    var [horaInicio, minutosInicio]= this.reunion.horaReunion.split(':');
+    var [horaFin, minutosFin]= this.reunion.horaFinalizacion.split(':');
+    this.colisionParticipante=false;
+
+    this.reunion.participantes.forEach((empleado:any)=>{
+        var reunionesParticipante: Array <Reunion>= new Array <Reunion>();
+    
+      
+      //Se traen las reuniones cargadas en la oficina que se asigno a la reunion
+      this.reunionService.getReunionesEmpleado(empleado._id).subscribe(
+        result=>{
+          Object.assign(reunionesParticipante, result);
+          if(reunionesParticipante.length ==0){
+            console.log("Reunion valida, participante sin reuniones");
+          }
+          else{
+            //Por cada reunion en la oficina se comparan los datos
+            reunionesParticipante.forEach((element:any)=>{
+            
+              var [añoReunionOficina, mesReunionOficina, diaReunionOficina]= element.fecha.split('-');
+              //Se comprueba la fecha de la reunion cargada coicide con la fecha de alguna reunion 
+              if(añoReunion == añoReunionOficina && mesReunion == mesReunionOficina && diaReunion == diaReunionOficina){
+              
+                console.log("Reunion en el mismo dia");
+
+                //Variables de la reunion de la Oficina
+                var [horaInicioAux, minutosInicioAux]= element.horaReunion.split(':');
+                var [horaFinAux, minutosFinAux]= element.horaFinalizacion.split(':');
+                
+                if((horaInicio >= horaInicioAux && minutosInicio >= minutosInicioAux) && (horaFin <= horaFinAux )){
+                  console.log("Horario reunion ingresada esta dentro del horario de otra reunion");
+                  this.toastr.error('El horario de la reunion ingresada esta dentro del horario de otra reunion: '+element.nombre, 'Colision participante ' + empleado.nombre);
+                  this.colisionParticipante=true;
+
+                }else{
+                  if((horaInicio <= horaInicioAux && (minutosInicio <= minutosInicioAux || minutosInicio > minutosInicioAux)) && (horaFin >= horaFinAux && (minutosFin >= minutosFinAux ||minutosFin < minutosFinAux ))){
+                    console.log("Horario reunion ingresada contiene al horario de otra reunion");
+                    this.toastr.error('El horario de la reunion ingresada contiene al horario de otra reunion: '+element.nombre, 'Colision participante '+ empleado.nombre);
+                    this.colisionParticipante=true;
+                  }
+                  else{
+                   
+                    console.log("Reunion valida");
+                   
+                    
+                  }
+                }
+              }else{
+                console.log("Reunion valida, no coicide el dia con ninguna reunion");
+              }
+            });
+          }
+        
+        },
+        error=>{}
+      );
+    });
+    this.validarColisionOficina();
+  }
+   /* VALIDACION: colisiones entre oficinas */
+  validarColisionOficina(){
+    this.colisionOficina=false;
+    var reunionesOficina: Array <Reunion>= new Array <Reunion>();
+    //Variables para las comparaciones
+    var [añoReunion, mesReunion, diaReunion]= this.reunion.fecha.split('-');
+    var [horaInicio, minutosInicio]= this.reunion.horaReunion.split(':');
+    var [horaFin, minutosFin]= this.reunion.horaFinalizacion.split(':');
+    
+    //Se traen las reuniones cargadas en la oficina que se asigno a la reunion
+    this.reunionService.getReunionesOficina(this.reunion.oficina._id).subscribe(
+      result=>{
+        Object.assign(reunionesOficina, result);
+        if(reunionesOficina.length ==0){
+          console.log("Reunion en oficina valida, sin reuniones en oficina");
+        }
+        else{
+          //Por cada reunion en la oficina se comparan los datos
+          reunionesOficina.forEach((element:any)=>{
+           
+            var [añoReunionOficina, mesReunionOficina, diaReunionOficina]= element.fecha.split('-');
+             //Se comprueba la fecha de la reunion cargada coicide con la fecha de alguna reunion 
+            if(añoReunion == añoReunionOficina && mesReunion == mesReunionOficina && diaReunion == diaReunionOficina){
+            
+              console.log("Reunion en la oficina el mismo dia");
+
+              //Variables de la reunion de la Oficina
+              var [horaInicioAux, minutosInicioAux]= element.horaReunion.split(':');
+              var [horaFinAux, minutosFinAux]= element.horaFinalizacion.split(':');
+              
+              if((horaInicio >= horaInicioAux && minutosInicio >= minutosInicioAux) && (horaFin <= horaFinAux)){
+                console.log("Horario reunion ingresada esta dentro del horario de otra reunion");
+                this.toastr.error('El horario de la reunion ingresada esta dentro del horario de otra reunion: '+element.nombre, 'Colision oficina');
+                this.colisionOficina=true;
+
+              }else{
+                if((horaInicio <= horaInicioAux || minutosInicio == minutosInicioAux) && (horaFin >= horaFinAux || minutosFin == minutosFinAux)){
+                  console.log("Horario reunion ingresada contiene al horario de otra reunion");
+                  this.toastr.error('El horario de la reunion ingresada contiene al horario de otra reunion: '+element.nombre, 'Colision oficina');
+                  this.colisionOficina=true;
+                }
+                else{
+                  console.log("Reunion en oficina valida");
+                }
+              }
+            }else{
+              console.log("Reunion en oficina valida, no coicide el dia con ninguna reunion");
+            }
+          });
+        }
+        if(this.colisionOficina == false && this.colisionParticipante==false && this.reunionValida == true){
+          this.registrarReunion();
+        }
+      },
+      error=>{}
+    );
+  }
+
 }

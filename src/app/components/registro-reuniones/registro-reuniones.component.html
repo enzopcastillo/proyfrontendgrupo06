@@ -9,7 +9,7 @@
               <h6 class="mb-0">
                 <a routerLink="/principal/Administrador" class="text-reset">Home</a>
                 <span>/</span>
-                <a routerLink="/principal/Administrador/gestionReuniones">Gestion Reuniones</a>
+                <a routerLink="/principal/Administrador/gestionReuniones" class="text-reset">Gestion Reuniones</a>
                 <span>/</span>
                 <a href="#">Formulario Reunion</a>
               </h6>
@@ -173,7 +173,7 @@
                 <span class="visually-hidden">Next</span>
             </button>
             <div class="div-btn-agregar">
-                <button  *ngIf="accion=='new'" type="button" id="botonb"(click)="validacionReunion()" class="btn mb-3" [disabled]="form.invalid">REGISTRAR</button> 
+                <button  *ngIf="accion=='new'" type="button" id="botonb"(click)="compararHoras()" class="btn mb-3" [disabled]="form.invalid">REGISTRAR</button> 
                 <button  *ngIf="accion=='update'" type="button" (click)="modificarReunion()" class="btn btn-modificar mb-3" [disabled]="form.invalid">MODIFICAR</button> 
             </div>
         </div>

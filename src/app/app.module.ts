@@ -92,7 +92,9 @@ PdfMakeWrapper.setFonts(pdfFonts);
     FlatpickrModule.forRoot(),
     NgbModule,
     AlifeFileToBase64Module,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      disableTimeOut: true
+    }),
   ],
   providers: [
     LoginService,{
