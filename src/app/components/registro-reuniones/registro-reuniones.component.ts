@@ -120,10 +120,7 @@ export class RegistroReunionesComponent implements OnInit {
 
   /* CRUD REUNIONES */
   registrarReunion(){
-    this.compararHoras();
-    if (this.reunionValida == false){
-      this.toastr.error('La hora de finalizacion de la reunion tiene que ser mayor que la de inicio');
-    } else{
+  
       this.reunionService.addReunion(this.reunion).subscribe((r) => {
         console.log(r);
         //this.reunion = new Reunion();
@@ -136,7 +133,7 @@ export class RegistroReunionesComponent implements OnInit {
       this.generarQR(url);
       console.log("reunion luego de modificar: ", this.reunion);
       this.router.navigate(['principal/Administrador/gestionReuniones']);
-    }
+    
   }
 
   buscarReunion(){
