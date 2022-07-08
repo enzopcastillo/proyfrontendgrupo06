@@ -152,11 +152,14 @@ aux!: Reunion;
   }
   
   agregarNotificacionEmpleado(reunion: Reunion){
+
     this.notificacionServ.getNotificaciones().subscribe((nots) => {
       for(var i=0; i < reunion.participantes.length; i++){
+
         var asunto = "Reunion suspendida";
         var mensaje = "La reunion '" + reunion.nombre + "' a realizarse en la fecha " + reunion.fecha + ", en la oficina "+ reunion.oficina.nombre + "fue suspendida.";
-        this.envioMail.sendMail(reunion.participantes[i].email, asunto, mensaje, " ").subscribe((r)=> {
+        var imagen = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAzoAAAMzCAIAAADh3PArAAAACXBIWXMAAAsTAAALEwEAmpwYAAAgAElEQVR4nOzd93sUVcPw8fcvuhUVOyX0XgQS6SSht9BEelNAKdJ714CASLkp0kSKSAdpUkMvoQQymW2zu7P7Xrj3gwgpu5uZOWfOfD/X+eG9rvd+1slkM/Nlyjn/Lw4AAACJ/T/RGwAAAIDykGsAAABSI9cAAACkRq4BAABIjVwDAACQGrkGAAAgNXINAABAauQaAACA1Mg1AAAAqZFrAAAAUiPXAAAApEauAQAASI1cAwAAkBq5BgAAIDVyDQAAQGrkGgAAgNTINQAAAKmRawAAAFIj1wAAAKRGrgEAAEiNXAMAAJAauQYAACA1cg0AAEBq5BoAAIDUyDUAAACpkWsAAABSI9cAAACkRq4BAABIjVwDAACQGrkGAAAgNXINAABAauQaAACA1Mg1AA";
+        this.envioMail.sendMail(reunion.participantes[i].email, asunto, mensaje, imagen).subscribe((r)=> {
           console.log(r)
         })
         reunion.participantes[i].notificaciones.push(nots[nots.length - 1]);
