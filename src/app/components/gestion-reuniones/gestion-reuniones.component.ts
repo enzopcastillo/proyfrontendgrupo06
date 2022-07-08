@@ -27,7 +27,7 @@ export class GestionReunionesComponent implements OnInit {
   participanteSelected!: string;
   participantes!: Array <Empleado>;
   notificacion!: Notificacion;
-  remitentes!: Array<string>;
+
 
 aux!: Reunion;
 
@@ -122,7 +122,7 @@ aux!: Reunion;
     //Se notifica que la reunion fue suspendida
     if( r.estadoReunion == "pendiente"){
       this.crearNotificacion(this.aux);
-      this.enviarMail(this.aux);
+      
     }
   }
   modificarParticipante(empleado: Empleado){
@@ -150,34 +150,20 @@ aux!: Reunion;
       }
     )
   }
-  enviarMail(reunion: Reunion){
-    var asunto = "Reunion suspendida";
-    var mensaje = "La reunion '" + reunion.nombre + "' a realizarse en la fecha " + reunion.fecha + ", en la oficina "+ reunion.oficina.nombre + "fue suspendida.";
-    console.log(this.remitentes);
-    this.remitentes.forEach((element:any)=>{
-      this.envioMail.sendMail(element, asunto, mensaje, reunion.codigoQr).subscribe((r)=> {
-        console.log("aqui llega");
-        console.log(r);
-      });
-    })
-    // for(var i=0 ; i < this.remitentes.length; i++){
-    //   this.envioMail.sendMail(this.remitentes[i], asunto, mensaje, reunion.codigoQr).subscribe((r)=> {
-    //     console.log("aqui llega");
-    //     console.log(r);
-    //   });
-    // }
-  }
+  
   agregarNotificacionEmpleado(reunion: Reunion){
-    this.remitentes = new Array<string>();
     this.notificacionServ.getNotificaciones().subscribe((nots) => {
       for(var i=0; i < reunion.participantes.length; i++){
-        this.remitentes.push(reunion.participantes[i].email);
-        console.log(this.remitentes);
+        var asunto = "Reunion suspendida";
+        var mensaje = "La reunion '" + reunion.nombre + "' a realizarse en la fecha " + reunion.fecha + ", en la oficina "+ reunion.oficina.nombre + "fue suspendida.";
+        this.envioMail.sendMail(reunion.participantes[i].email, asunto, mensaje, " ").subscribe((r)=> {
+          console.log(r)
+        })
         reunion.participantes[i].notificaciones.push(nots[nots.length - 1]);
         this.modificarParticipante(reunion.participantes[i]);
         console.log("array notificaciones empleado:", reunion.participantes[i].notificaciones);
       }
-    });
+    })
   }
 
   crearNotificacion(reunion: Reunion){
