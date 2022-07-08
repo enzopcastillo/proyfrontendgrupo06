@@ -55,8 +55,7 @@ export class EstadisticaComponent implements OnInit {
    this.fechas = new Array<Date>();
   
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   
 

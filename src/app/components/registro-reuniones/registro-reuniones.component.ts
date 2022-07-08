@@ -284,7 +284,7 @@ export class RegistroReunionesComponent implements OnInit {
     }
     if (this.reunionValida == false ){
       console.log('Error en los horarios.')
-      this.toastr.error('', 'Error',{
+      this.toastr.error('El horario de finalizacion tiene que ser mayor que el de inicio.', 'Error',{
         positionClass:'toast-top-left'
       });
     }
