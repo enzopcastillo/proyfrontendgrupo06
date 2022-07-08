@@ -1,5 +1,10 @@
 .container-fluid{
     padding: 10px;
+  
+    align-content: center;
+}
+#header{
+    padding: 10px;
     background-image: url('/assets/fondo-header.jpg');
     background-size:cover;
     align-content: center;

@@ -49,8 +49,7 @@ p{
 }
 form{
     width: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px;
 }
     input:hover{
         background: slateblue;
