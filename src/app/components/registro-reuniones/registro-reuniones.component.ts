@@ -163,6 +163,10 @@ export class RegistroReunionesComponent implements OnInit {
     })
   }
 
+  updateReunion(){
+    
+  }
+
   cargarReunion(id: string){
     this.reunion.recursos= [];
     this.reunion.participantes=[];
