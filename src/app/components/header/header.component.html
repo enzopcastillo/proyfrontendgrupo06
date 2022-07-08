@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg text-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/principal"><i class="fa-brands fa-guilded"></i> gathering!</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- <li class="nav-item">
+            <a  class="nav-link active" aria-current="page" type="button" [routerLink]="'principal'"> HOME</a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link" aria-current="page" type="button">Informacion</a>
+          </li> -->
+        </ul> 
+        <form class="d-flex">
+          <div class="dropdown" *ngIf="loginService.userLoggedIn()">
+            <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+              <ngx-avatar bgColor="#1c12e5ab" size="50" name="{{loginService.userLogged()}}"></ngx-avatar>
+              <strong>{{loginService.userLogged()}}</strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+              <li><a class="dropdown-item"  *ngIf="loginService.userLoggedIn()" routerLink="['login']" (click)="logout()">Cerrar Sesion</a></li>
+            </ul>
+          </div>
+        </form>
+
+
+        <div class="dropdown" *ngIf="loginService.userLoggedIn()">
+          <button class="position-relative btn b" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-bell-fill ic"><span class="badge bg-secondary position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{notificacionesActivas.length}}</span></i>
+          </button>
+          <ul class="dropdown-menu area dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+              <li *ngIf="!notificacionesActivas.length"><p class="lead text-center">No tienes Notificaciones </p></li>
+              <li *ngFor="let n of notificacionesActivas">
+                <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+                  <div class="d-flex w-100 align-items-center justify-content-between">
+                    <strong >{{n.titulo}}</strong>
+                    <p class="text-muted"><i class="bi bi-calendar-event"></i>{{n.fecha}}</p>
+                  </div>
+                  <div class="col-10 mb-1 lead">{{n.descripcion}}</div>
+                </a>
+              </li>
+          </ul>
+        </div>
+        
+        <form class="d-flex">
+          <button type="button" class="btn t"  *ngIf="!loginService.userLoggedIn()"  [routerLink]="['login']">Iniciar Sesion </button>
+        </form>
+      </div>
+    </div>
+  </nav> 
+

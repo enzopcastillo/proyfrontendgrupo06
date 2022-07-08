@@ -1,0 +1,43 @@
+<div class="row container-fluid">
+    <div id="contenedor-form" class="login row">
+        <div class=" col-lg-5 col-md-5 mb-3 ms-md-3"> 
+            <h1 class="text-center">Welcome</h1>
+            <p>Ingrese con su cuenta: </p>
+            <form #form="ngForm" class="needs-validation" name="form">
+                <div class="form-group was-validated">
+                    <label class="form-label" for="username"> <i class="fa-solid fa-user"></i>  Usuario</label>
+                    <input class="form-control" type="" name="username" [(ngModel)]="userform.username" required #username="ngModel">   
+                    <div *ngIf="username.invalid && (username.touched || username.dirty)" class="alert alert-danger">
+                        <div *ngIf="username.errors?.['required']">Username requerido.</div>
+                    </div>
+                    <!--
+                    <div class="invalid-feedback">
+                        Ingrese su nombre de usuario
+                    </div>
+                    -->
+                </div>
+                <div class="form-group was-validated">
+                    <label class="form-label" for="password"><i class="fa-solid fa-lock"></i>  Contraseña</label>
+                    <input class="form-control" type="password" name="password" [(ngModel)]="userform.password" required #password="ngModel">
+                    <div *ngIf="password.invalid && (password.touched || password.dirty)" class="alert alert-danger">
+                        <div *ngIf="password.errors?.['required']">Password requerido.</div>
+                    </div>
+                    <!--
+                    <div class="invalid-feedback">
+                        Ingrese su nombre de usuario
+                    </div>
+                    -->
+                </div>
+                <div id="btns">
+                   <button class="btn btn-login btn-lg"  (click)="login()" [disabled]="form.invalid">LOGIN</button>
+                   <div class="alert-danger">{{msglogin}}</div>
+                </div>
+            </form>
+        </div>
+        <div id="img-login" class="col-lg-5 col-md-5 mb-3 ms-md-3" >
+              <img src="/assets/undraw_Access_account.png" alt="...">
+              <p>Se ha olvidado su contraseña? <a href="">Ingrese aqui</a></p>
+            <!-- <input  class="btn btn-atras"  value="ATRAS" (click)="irAPrincipal()"> -->
+        </div>
+    </div>
+</div>

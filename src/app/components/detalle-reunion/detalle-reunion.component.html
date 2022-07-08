@@ -1,0 +1,79 @@
+<div class="card">
+    <div class="card-header">
+        <h1>{{reunion.nombre}}</h1>
+    </div>
+
+    <div class="card-body">
+        <div class="justify-content-center">
+            <h2>Descripcion:</h2> 
+            <p>{{reunion.descripcion}}</p>
+        </div>
+        <div class="justify-content-center">
+            <h2>Estado:</h2> 
+            <p>{{reunion.estadoReunion}}</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col">
+                <h2>Fecha:</h2>
+                <p>{{reunion.fecha}}</p>
+            </div>
+            <div class="col">
+                <h2>Hora</h2>
+                <p>{{reunion.horaReunion}} - {{reunion.horaFinalizacion}}</p>
+            </div>
+            <div class="col">
+                <h2>Tipo reunion:</h2>
+                <p> {{reunion.tipoReunion.nombre}}</p>
+            </div>
+        </div>
+
+        <div class=" row justify-content-center">
+            <h2>Oficina:</h2>
+            <div class="col">
+                <h3>Nombre:</h3>
+                <p>{{reunion.oficina.nombre}}</p>
+            </div>
+            <div class="col">
+                 <h3>Numero:</h3>
+                <p>{{reunion.oficina.numero}}</p>
+            </div>
+            <div class="col">
+                <h3>Piso:</h3>
+                <p>{{reunion.oficina.piso}}</p>
+            </div>
+            <div class="col">
+                 <h3>Edificio:</h3>
+                <p>{{reunion.oficina.edificio}}</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <h2>Participantes:</h2>
+            <div class="lista">
+                <ul *ngFor="let item of reunion.participantes">
+                    <li>{{item.apellido}} {{item.nombre}} | {{item.dependencia.nombre}} - {{item.email}}</li>
+                </ul>
+            </div>
+            
+        </div>
+        <div class="justify-content-center">
+            <h2>Recursos</h2>
+            <div class="lista">
+                <ul *ngFor="let item of reunion.recursos">
+                    <li>Nombre: {{item.nombre}} | Tipo: {{item.tipo}} | <a href="{{item.archivoUrl}}"> Link</a> </li>
+                </ul>
+            </div>
+            
+        </div>
+        <div class="justify-content-center">
+            <h2>Codigo QR:</h2>
+            <img src={{reunion.codigoQr}} alt="">
+            
+        </div>
+    </div>
+   
+
+</div>
+<div class="justify-content-center">
+    <button class="btn" (click)="generarPDF()"><i class="fa-solid fa-print"></i> Imprimir</button>
+</div>
+ 

@@ -1,0 +1,286 @@
+<div class="container-fluid">
+    <!-- Background image -->
+    <div id="header" class="text-center">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div class="text-white">
+            <h1 class="mb-3">Formulario Reunion</h1>
+            <!-- Breadcrumb -->
+            <nav class="d-flex">
+              <h6 class="mb-0">
+                <a routerLink="/principal/Administrador" class="text-reset">Home</a>
+                <span>/</span>
+                <a routerLink="/principal/Administrador/gestionReuniones">Gestion Reuniones</a>
+                <span>/</span>
+                <a href="#">Formulario Reunion</a>
+              </h6>
+            </nav>
+            <!-- Breadcrumb -->
+          </div>
+        </div>
+    </div>
+   
+    <form #form="ngForm" action="" class="">
+        <div id="carouselExampleIndicators" class="carousel" data-interval="false" >
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="card">
+                        <div class="card-body row m-auto">
+                            <div class="col-11 m-auto mb-3" id="item">
+                                <label for="nombre" class="form-label">Ingrese Nombre de la Reunion:</label>
+                                <input type="text" id="nombre" name="nombre" class="form-control" [(ngModel)]="reunion.nombre" required #nombre="ngModel">
+                                <div *ngIf="nombre.invalid && (nombre.touched || nombre.dirty)" class="alert alert-danger">
+                                    <div *ngIf="nombre.errors?.['required']">El nombre es requerido.</div>
+                                </div>
+                            </div>
+                            <div class="col-11 m-auto mb-3" id="item">
+                                <label for="descripcion" class="form-label">Ingrese Descripcion de la Reunion:</label>
+                                <input type="text" id="descripcion" name="descripcion" class="form-control" [(ngModel)]="reunion.descripcion" required #descripcion="ngModel">
+                                <div *ngIf="descripcion.invalid && (descripcion.touched || descripcion.dirty)" class="alert alert-danger">
+                                    <div *ngIf="descripcion.errors?.['required']">La descripcion es requerida.</div>
+                                </div>
+                            </div>
+                            <div class="col-11 m-auto mb-3" id="item">
+                                <label for="fecha" class="form-label">Ingrese Fecha:</label>
+                                <input type="date" id="fecha" name="fecha" class="form-control" min="{{minDate}}" [(ngModel)]="reunion.fecha" required #fecha="ngModel">
+                                <div *ngIf="fecha.invalid && (fecha.touched || fecha.dirty)" class="alert alert-danger">
+                                    <div *ngIf="fecha.errors?.['required']">La fecha es requerida.</div>
+                                </div>
+                            </div>
+                            <div class="col-5 m-auto mb-3" id="item">
+                                <label for="horaReunion" class="form-label">Ingrese Hora Inicio (08:00-20:00): </label><br>
+                                <input id="horaReunion" type="time" name="horaReunion" min="08:00" max="20:00" class="form-control" [(ngModel)]="reunion.horaReunion" required #horaReunion="ngModel">
+                                <span class="validity"></span>
+                                <div *ngIf="horaReunion.invalid && (horaReunion.touched || horaReunion.dirty)" class="alert alert-danger">
+                                    <div *ngIf="horaReunion.errors?.['required']">La hora de inicio es requerida.</div>
+                                </div>
+                            </div>
+                            <div class="col-5 m-auto mb-3" id="item">
+                                <label for="horaFinalizacion" class="form-label">Ingrese Hora Finalizacion (09:00-21:00): </label>
+                                <input type="time" id="horaFinalizacion" name="horaFinalizacion" class="form-control" min="09:00" max="21:00" [(ngModel)]="reunion.horaFinalizacion" required #horaFinalizacion="ngModel">
+                                <span class="validity"></span>
+                                <div *ngIf="horaFinalizacion.invalid && (horaFinalizacion.touched || horaFinalizacion.dirty)" class="alert alert-danger">
+                                    <div *ngIf="horaFinalizacion.errors?.['required']">La hora de finalizacion es requerida.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="card-body row m-auto">
+                            <div class="col-11 m-auto mb-3 " id="item">
+                                <label for="tipoReunion" class="form-label">Seleccione el Tipo de Reunion:</label>
+                                <select name="tipoReunion" id="tipoReunion" class="form-select" [(ngModel)]="reunion.tipoReunion" required #tipoReunion="ngModel">
+                                    <option *ngFor="let tr of tiposReunion" [ngValue]="tr">{{tr.nombre}}</option>
+                                </select>
+                            </div>
+                            <div class="col-11 m-auto mb-3">
+                                <label for="oficina" class="form-label">Seleccione Oficina donde se celebrara la Reunion: </label>
+                                <select name="oficina" id="oficina" class="form-select" [(ngModel)]="reunion.oficina" required #oficina="ngModel">
+                                    <option *ngFor="let o of oficinas" [ngValue]="o">{{o.nombre}} Edificio: {{o.edificio}} Piso: {{o.piso}} Numero: {{o.numero}}</option>
+                                </select>
+                            </div>
+                            <div class="col-11 m-auto mb-3">
+                                <label for="prioridad" class="form-label">Ingrese Prioridad de la Reunion (1-5): </label>
+                                <input type="number" id="prioridad" name="prioridad" class="form-control" min="1" max="5" [(ngModel)]="reunion.prioridad" required #prioridad="ngModel">
+                                <div *ngIf="prioridad.invalid && (prioridad.touched || prioridad.dirty)" class="alert alert-danger">
+                                    <div *ngIf="prioridad.errors?.['required']">La prioridad de la reunion es requerida.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="card-body row m-auto">
+                            <table class="table">
+                                <thead>
+                                    <tr><th scope="col">Nombre y Apellido</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let p of participantes">
+                                        <td>{{p.nombre}} {{p.apellido}}</td>
+                                        <td><button type="button" class="btn btn-dark" (click)="seleccionarParticipante(p, $event)">Seleccionar</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table">
+                                <thead>
+                                    <tr><th scope="col">Nombre y Apellido</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let par of reunion.participantes">
+                                        <td>{{par.nombre}} {{par.apellido}}</td>
+                                        <td><button type="button" class="btn btn-danger" (click)="eliminarParticipante(par)">Quitar</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="card-body row m-auto">
+                            <form #formRecurso="ngForm" action="">
+                                <div class="col-11 m-auto mb-3">
+                                    <label for="nombre" class="form-label">Ingrese nombre del Recurso</label>
+                                    <input type="text" class="form-control" name="nombre" id="nombre" [(ngModel)]="recurso.nombre" required #nombre="ngModel">
+                                </div>
+                                <div class="col-11 m-auto mb-3">
+                                    <label for="tipo" class="form-label">Seleccione el tipo de Archivo: </label>
+                                    <select name="tipo" id="tipo" class="form-select" [(ngModel)]="recurso.tipo" required #tipo="ngModel">
+                                        <option value="pdf">PDF</option>
+                                        <option value="imagen">Imagen</option>
+                                        <option value="power point">Power Point</option>
+                                        <option value="word">Word</option>
+                                    </select>
+                                </div>
+                                <div class="col-11 m-auto mb-3">
+                                    <label for="archivoUrl" class="form-label">Cargar Archivo: </label>
+                                    <!-- <input type="file" class="form-control" name="selecrecurso" id="selecrecurso" alife-file-to-base64 multiple
+                                        (onFileChanged)="onFileChanges($event)"
+                                        accept="image/x-png,image/gif,image/jpeg" /> -->
+                                    <input type="text" class="form-control" name="archivoUrl" id="archivoUrl" [(ngModel)]="recurso.archivoUrl" >
+                                </div>
+                                <button type="button" id="boton" class="btn btn-dark" (click)="cargarRecurso()" [disabled]="formRecurso.invalid">Cargar Recurso</button>
+                            </form>    
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre Recurso</th>
+                                        <th>Tipo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let r of reunion.recursos">
+                                        <th>{{r.nombre}}</th>
+                                        <th>{{r.tipo}}</th>
+                                        <th><a href={{r.archivoUrl}} > Archivo </a></th>
+                                        <th><button type="button" class="btn btn-danger" (click)="quitarRecurso(r)"> Quitar </button></th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark" aria-hidden="true" style="margin-right: 75px; "></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-dark" aria-hidden="true" style="margin-left: 75px;"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            <div class="div-btn-agregar">
+                <button  *ngIf="accion=='new'" type="button" id="botonb"(click)="validacionReunion()" class="btn mb-3" [disabled]="form.invalid">REGISTRAR</button> 
+                <button  *ngIf="accion=='update'" type="button" (click)="modificarReunion()" class="btn btn-modificar mb-3" [disabled]="form.invalid">MODIFICAR</button> 
+            </div>
+        </div>
+    </form>
+</div>
+
+
+        <!--
+        <div class="card w-50 m-auto">
+            <form action="" class="row m-auto">
+                <div class="col-11 m-auto mb-3">
+                    <label for="nombre" class="form-label">Ingrese Nombre de la Reunion:</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" [(ngModel)]="reunion.nombre">
+                </div>
+                <div class="col-11 m-auto mb-3">
+                    <label for="descripcion" class="form-label">Ingrese Descripcion de la Reunion:</label>
+                    <input type="text" id="descripcion" name="descripcion" class="form-control" [(ngModel)]="reunion.descripcion">
+                </div>
+                <div class="col-11 m-auto mb-3">
+                    <label for="fecha" class="form-label">Ingrese Fecha:</label>
+                    <input type="date" id="fecha" name="fecha" class="form-control" [(ngModel)]="reunion.fecha">
+                </div>
+                <div class="col-5 m-auto mb-3">
+                    <label for="horaInicio" class="form-label">Ingrese Hora Inicio:</label>
+                    <input type="time" id="horaInicio" name="horaInicio" class="form-control" [(ngModel)]="reunion.horaReunion">
+                </div>
+                <div class="col-5 m-auto mb-3">
+                    <label for="horaFin" class="form-label">Ingrese Hora Finalizacion: </label>
+                    <input type="time" id="horaFin" name="horaFin" class="form-control" [(ngModel)]="reunion.horaFinalizacion">
+                </div>
+                <div class="col-11 m-auto mb-3">
+                    <label for="tipoReunion" class="form-label">Seleccione el Tipo de Reunion:</label>
+                    <select name="tipoReunion" id="tipoReunion" class="form-select" [(ngModel)]="reunion.tipoReunion">
+                        <option *ngFor="let tr of tiposReunion" [ngValue]="tr">{{tr.nombre}}</option>
+                    </select>
+                </div>
+                <div class="col-11 m-auto mb-3">
+                    <label for="oficina" class="form-label">Seleccione Oficina donde se celebrara la Reunion: </label>
+                    <select name="oficina" id="oficina" class="form-select" [(ngModel)]="reunion.oficina">
+                        <option *ngFor="let o of oficinas" [ngValue]="o">Edificio: {{o.edificio}} Piso: {{o.piso}} Numero: {{o.numero}}</option>
+                    </select>
+                </div>
+                <div class="col-11 m-auto mb-3">
+                    <label for="prioridad" class="form-label">Ingrese Prioridad de la Reunion: </label>
+                    <input type="number" id="prioridad" name="prioridad" class="form-control" [(ngModel)]="reunion.prioridad">
+                </div>
+                <div class="col-12 m-auto mb-3">
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Seleccionar Participantes de la Reunion</button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nombre y Apellido</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let p of participantes">
+                                                <td>{{p.nombre}} {{p.apellido}}</td>
+                                                <td><button type="button" class="btn btn-dark" (click)="seleccionarParticipante(p)">Seleccionar</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 m-auto mb-3">
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOnen">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOnen" aria-expanded="true" aria-controls="collapseOnen">
+                                Recursos </button>
+                            </h2>
+                            <div id="collapseOnen" class="accordion-collapse collapse show" aria-labelledby="headingOnen" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <form action="">
+                                        <label for="nombreRecurso" class="form-label">Ingrese nombre del Recurso</label>
+                                        <input type="text" class="form-control" name="nombreRecurso" id="nombreRecurso" [(ngModel)]="recurso.nombre">
+        
+                                        <label for="tipoRecurso" class="form-label">Seleccione el tipo de Archivo: </label>
+                                        <select name="tipoRecurso" id="tipoRecurso" class="form-select" [(ngModel)]="recurso.tipo">
+                                            <option value="pdf">PDF</option>
+                                            <option value="imagen">Imagen</option>
+                                            <option value="power point">Power Point</option>
+                                            <option value="word">Word</option>
+                                        </select>
+        
+                                        <label for="selecrecurso" class="form-label">Cargar Archivo: </label>
+                                        <input type="file" class="form-control" name="selecrecurso" id="selecrecurso" alife-file-to-base64 multiple
+                                            (onFileChanged)="onFileChanges($event)"
+                                            accept="image/x-png,image/gif,image/jpeg" />
+        
+                                        <button type="button" class="btn btn-dark" (click)="cargarRecurso()">Cargar Recurso</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" (click)="registrarReunion()" class="btn btn-dark mb-3">Registrar Reunion</button>
+            </form>
+        </div>
+        -->

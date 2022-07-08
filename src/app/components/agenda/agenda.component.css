@@ -1,0 +1,108 @@
+.container-fluid{
+    margin-top: 0px;
+    padding: 0px;
+}
+.row{
+    padding: 0px;
+    margin: 0px;
+}
+#card{
+    position: absolute;
+    background-color: rgba(0, 0, 0, .8);
+    top: 75%;
+    bottom: 0;
+    left: 0%;
+    right: 0%;
+}
+
+#header{
+    background-image: url('/assets/fondo-header.jpg');
+    background-size:cover;
+    height: 300px;
+    width: auto;
+    padding: 0px;
+ 
+}
+
+.mask{
+    background-color: rgba(0, 0, 0, 0);
+    width:auto;
+    height: 400px;
+    margin: 0px;
+}
+h2{
+    font-family: 'Readex Pro', sans-serif;
+    text-shadow: rgba(0, 0, 0, 0.6);
+    font-size: 40px;
+    color:#6200EA;
+}
+h1{
+    font-family: 'Readex Pro', sans-serif;
+    color:#ffffffed;
+    font-size: 70px;
+    margin-bottom: 10px;
+
+}
+h3{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color:rgba(246, 246, 246, 0.874) ;
+}
+.clearfix{
+    padding: 80px;
+    padding-bottom: 0px;
+    padding-top: 40px;
+}
+
+#flecha{
+    justify-content: center;
+    color:#9e80f1;
+    text-align: center;
+    font-size: 30px;
+}
+
+p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color:rgb(56, 56, 56) ;
+}
+#contenedor-calendario{
+    padding: 70px;
+  
+}
+.tituloMes{
+    color:#8957f5;
+    font-family: 'Readex Pro', sans-serif;
+    font-size: 30px;
+}
+.btn{
+    font-family: 'Readex Pro', sans-serif;
+ 
+}
+.btn-primary{
+    background-color: #8764f7;
+    border: none;
+}
+.btn-primary:hover{
+    background-color: #8f96f5;
+}
+.modal-body h2{
+    color:#8957f5;
+    text-align: center;   
+    font-family: 'Readex Pro', sans-serif;
+    font-size: 20px;
+}
+.modal-body p{
+    font-family: 'Readex Pro', sans-serif;
+    font-size: 15px;
+    text-align: center;
+}
+.modal-body{
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+.modal-body img{
+    width: 300px;
+    height: 300px;
+}

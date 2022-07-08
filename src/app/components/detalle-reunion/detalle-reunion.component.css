@@ -1,0 +1,54 @@
+.card{
+    padding:10px;
+}
+.card-header{
+    background-color: #8882f4;
+    border: none;
+    text-align: center;
+    justify-content: center;
+    font-family: 'Readex Pro';
+    color: aliceblue;
+    font-size: 15px;
+}
+.card-body{
+    font-family: 'Readex Pro';
+    color: rgb(58, 58, 58);
+    font-size: 15px;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}
+.card-body h2{
+    font-family: 'Readex Pro';
+    color: #716af4;
+    text-align: center;
+    font-size: 18px;
+}
+.card-body h3{
+    font-family: 'Readex Pro';
+    color: #716af4;
+    text-align: center;
+    font-size: 14px;
+}
+.card-body p{
+    text-align: center;
+}
+.card-body ul{
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+  
+}
+
+.btn{
+    height: fit-content;
+    width: fit-content;
+    font-family: 'Readex Pro';
+    color: rgb(254, 254, 254);
+    margin: 5px;
+    background-color: #716af4;
+   
+}
+.lista ul{
+    list-style: none;
+}

@@ -1,0 +1,54 @@
+.container-fluid{
+    padding: 10px;
+    background-image: url('/assets/fondo-header.jpg');
+    background-size:cover;
+    align-content: center;
+}
+#formulario{
+    border-radius: 30px;
+    margin: auto;
+    text-align: center;
+    background-color: #807aedab;
+    color: white;
+    font-family: 'Montserrat', bold;
+    padding: 15px;
+}
+h5{
+    font-family: 'Readex Pro', sans-serif;
+    color:#ffffffff;
+    font-size: 20px;
+    margin: 10px;
+}
+.btn-close{
+    
+    width:fit-content ;
+    height: fit-content;
+   font-size: 20px;
+   
+}
+#btn-cerrar{
+    justify-content: right;
+    margin: 0px;  
+    padding: 0px;
+    text-align: right;
+}
+#item{
+margin-top: 15px;
+}
+input:hover{
+    background: slateblue;
+    color: aliceblue;
+}
+button{
+    margin-left: 240px;
+    text-align: center;
+    width: 150px;
+    margin-bottom: 30px;
+    background: slateblue;
+    color: rgb(255, 255, 255);
+}
+
+select:hover{
+    background: slateblue;
+    color: aliceblue;
+}

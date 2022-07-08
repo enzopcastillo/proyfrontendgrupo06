@@ -1,0 +1,93 @@
+#header{
+    background-image: url('/assets/fondo-header.jpg');
+    background-size:cover;
+    height: 300px;
+    width: auto;
+    padding: 0px;
+ 
+}
+
+.mask{
+    background-color: rgba(0, 0, 0, 0);
+    width:auto;
+    height: 400px;
+    margin: 0px;
+}
+.card{
+    padding: 10px;
+}
+h1{
+    font-family: 'Readex Pro', sans-serif;
+    color:#ffffffed;
+    font-size: 70px;
+    margin-bottom: 10px;
+
+}
+h3{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color:rgba(246, 246, 246, 0.874) ;
+}
+.clearfix{
+    padding: 80px;
+    padding-bottom: 0px;
+    padding-top: 40px;
+}
+
+#flecha{
+    justify-content: center;
+    color:#9e80f1;
+    text-align: center;
+    font-size: 30px;
+}
+
+p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color:rgb(56, 56, 56) ;
+}
+
+.btn{
+    font-family: 'Readex Pro';
+    background-color: rgb(153, 74, 255);
+    color: rgb(255, 255, 255);
+    margin: 5px;
+}
+
+.btn-agregar{
+    background-color: green;
+    text-align: right;
+    justify-content: right;
+}
+.btns{
+    justify-content: right;
+    margin: 0px;  
+    padding: 5px;
+    text-align: right;
+
+}
+.btn-agregar:hover{
+    background-color: rgb(31, 215, 31);
+}
+.btn-borrar{
+    background-color: rgb(240, 51, 51);
+}
+.btn-borrar:hover{
+    background-color: rgb(239, 27, 27);
+}
+.btn-seleccionar{
+    background-color: rgb(100, 110, 201);
+}
+.btn-seleccionar:hover{
+    background-color: rgb(66, 79, 196);
+}
+table{
+    border: #9e80f1 1px solid;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+table th{
+    font-family: 'Readex Pro';
+    color: rgb(66, 79, 196);
+    border-bottom:rgb(66, 79, 196) 2px solid;
+}

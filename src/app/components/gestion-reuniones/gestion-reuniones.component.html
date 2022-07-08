@@ -1,0 +1,106 @@
+<div id="header" class="text-center bg-image">
+  <div class="mask">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="text-white">
+        <h1 class="mb-3">Gestion de reuniones</h1>
+        <nav class="d-flex">
+        <h6 class="mb-0">
+          <a routerLink="/principal/Administrador" class="text-reset">Home</a>
+            <span>/</span>
+          <a routerLink="/principal/Administrador/gestionReuniones" class="text-reset">Gestion Reuniones</a>
+        </h6>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="col-8">
+  <h5><strong>BUSQUEDAS AVANZADAS</strong></h5>
+  <form #oficinasForm="ngForm" >
+    <div>
+      <div class="form-group">
+        <label for="exampleInputOrigen"><strong>Por oficinas:</strong></label>
+        <select name="oficinaSelected" id="oficinaSelected" [(ngModel)]="oficinaSelected" class="form-select" aria-label="Default select example">
+          <option *ngFor="let item of oficinas" [value]="item._id" (click)="busquedaPorOficina()" >{{item.nombre}}</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn btn-seleccionar" (click)="busquedaPorParticipantes()">buscar</button>
+  </form>
+  <form #participantesForm="ngForm" >
+    <div>
+      <div class="form-group">
+        <label for="exampleInputOrigen"><strong>Por participantes:</strong></label>
+        <select name="participanteSelected" id="participanteSelected" [(ngModel)]="participanteSelected" class="form-select" aria-label="Default select example">
+          <option *ngFor="let item of participantes" [value]="item._id"  selected>{{item.nombre}} {{item.apellido}} - {{item.dependencia.nombre}}</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn btn-seleccionar" (click)="busquedaPorParticipantes()">buscar</button>
+  </form>
+</div>
+<div class="col">
+  <div class="btns">
+    <button (click)="irCalendario()" type="button" class="btn btn-warning">Ver calendario</button>
+    <button class="btn btn-agregar" (click)="altaReunion()">AGREGAR <i class="fa-solid fa-circle-plus"></i></button>
+    <button (click)="cargarReuniones()" type="button" class="btn btn-warning">MOSTRAR TODAS</button>
+  </div>
+</div>
+
+<div class="card">
+    <table class="row-border hover">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Oficina</th>
+            <th>Participantes</th>
+            <th>Estado</th>
+            <th>Detalle</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of reuniones">
+            <td>{{ r.nombre }}</td>
+            <td>{{ r.descripcion }}</td>
+            <td>{{ r.fecha }}</td>
+            <td>{{ r.horaReunion}} - {{r.horaFinalizacion}}</td>
+            <td>{{ r.oficina.nombre}}</td>
+            <td>
+              <ul>
+                <li *ngFor="let item of r.participantes"> {{item.nombre}} {{item.apellido}}</li>
+              </ul>
+            </td>
+            <td>{{r.estadoReunion}}</td>
+            <td>
+                <button type="button" class="btn btn-seleccionar" (click)="verDetalle(r)" _blank><i class="fa-solid fa-eye"></i></button>
+            </td>
+            <td>  
+                <button type="button" class="btn btn-borrar" (click)="confirmacionBorrar(r)"><i class="fa-solid fa-trash"></i></button>
+                <button type="button" class="btn btn-seleccionar" (click)="modificarReunion(r)"><i class="fa-solid fa-pen"></i></button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+</div>
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+
+  </div>
+  <div class="modal-body justify-content-center">
+ 
+      <h2>Mensaje de confirmacion</h2>
+      <p>¿Quiere borrar {{ modalData?.nombreReunion}} ?</p>
+    
+  </div>
+  <div class="modal-footer justify-content-center">
+      <button class="btn btn-seleccionar" type="button"  onclick="close()" (click)="borrarReunion(modalData?.r)">Si</button>
+      <button type="button" class="btn btn-borrar" (click)="close()">
+        Cancelar
+      </button>
+  </div>
+</ng-template>

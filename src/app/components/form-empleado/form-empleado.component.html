@@ -1,0 +1,93 @@
+<div class="container-fluid">
+    <div id="header" class="text-center">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div class="text-white">
+            <h1 class="mb-3">Formulario Empleado</h1>
+            <nav class="d-flex">
+              <h6 class="mb-0">
+                <a routerLink="/principal/Administrador" class="text-reset">Home</a>
+                <span>/</span>
+                <a routerLink="/principal/Administrador/gestionEmpleados">Gestion Empleados</a>
+                <span>/</span>
+                <a href="#">Formulario Empleado</a>
+              </h6>
+            </nav>
+          </div>
+        </div>
+    </div>
+    <form #form="ngForm" class="card w-50 m-auto row mb-5" action="" id="formulario">
+        <div id="btn-cerrar">
+            <button (click)="cerrar()" type="submit" class="btn-close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="row mb-2 " id="item">
+            <div class="col-6">
+                <label for="nombre" class="form-label">Nombre: </label>
+                <input type="text" id="nombre" name="nombre" class="form-control" [(ngModel)]="empleado.nombre" 
+                    required #nombre="ngModel" verificar-caracter-especial verificar-primera-letra>
+                <div *ngIf="nombre.invalid && (nombre.touched || nombre.dirty)" class="alert alert-danger">
+                    <div *ngIf="nombre.errors?.['required']">El nombre es requerido.</div>
+                    <div *ngIf="nombre.errors?.['verificarCaracterEspecial']">No se permiten caracteres especiales.</div>
+                    <div *ngIf="nombre.errors?.['verificarPrimeraLetra']">La primera letra tiene que estar en mayuscula.</div>
+                </div>
+            </div>
+            <div class="col-6 ">
+                <label for="apellido" class="form-label">Apellido: </label>
+                <input type="text" id="apellido" name="apellido" class="form-control" [(ngModel)]="empleado.apellido" 
+                    required #apellido="ngModel" verificar-caracter-especial verificar-primera-letra>
+                <div *ngIf="apellido.invalid && (apellido.touched || apellido.dirty)" class="alert alert-danger">
+                    <div *ngIf="apellido.errors?.['required']">El apellido es requerido.</div>
+                    <div *ngIf="apellido.errors?.['verificarCaracterEspecial']">No se permiten caracteres especiales.</div>
+                    <div *ngIf="apellido.errors?.['verificarPrimeraLetra']">La primera letra tiene que estar en mayuscula.</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12" id="item">
+            <label for="email" class="form-label">Email: </label>
+            <input type="email" id="email" name="email" class="form-control" [(ngModel)]="empleado.email" required #email="ngModel" >
+            <div *ngIf="email.invalid && (email.touched || email.dirty)" class="alert alert-danger">
+                <div *ngIf="email.errors?.['required']">El email es requerido.</div>
+            </div>
+        </div>
+        <div class="col-12" id="item">
+            <label for="legajo" class="form-label">Legajo: </label>
+            <input type="text" id="legajo" name="legajo" class="form-control" minlength={{tamMinTexto}} maxlength={{tamMaxTexto}} [(ngModel)]="empleado.legajo" required #legajo="ngModel" [disabled]="accion=='update'">
+            <div *ngIf="legajo.invalid && (legajo.touched || legajo.dirty)" class="alert alert-danger">
+                <div *ngIf="legajo.errors?.['required']">El legajo es requerido.</div>
+                <div *ngIf="legajo.errors?.['minlength']">El legajo tiene que tener {{legajo.errors?.['minlength'].requiredLength}} caracteres </div>
+            </div>
+        </div>
+        <div class="col-12" id="item">
+            <label for="username" class="form-label">Username: </label>
+            <input type="text" id="username" name="username" class="form-control" [(ngModel)]="empleado.username" required #username="ngModel" [disabled]="accion=='update'">
+            <div *ngIf="username.invalid && (username.touched || username.dirty)" class="alert alert-danger">
+                <div *ngIf="username.errors?.['required']">El username es requerido.</div>
+            </div>
+        </div>
+        <div class="col-12" id="item">
+            <label for="password" class="form-label">Password: </label>
+            <input type="text" id="password" name="password" class="form-control" [(ngModel)]="empleado.password" required #password="ngModel">
+            <div *ngIf="password.invalid && (password.touched || password.dirty)" class="alert alert-danger">
+                <div *ngIf="password.errors?.['required']">La contraseña es requerida.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6" id="item">
+                <label for="dependencia" class="form-label">Dependencia: </label>
+                <select name="dependencia" id="dependencia" class="form-select" [(ngModel)]="empleado.dependencia" required #dependencia="ngModel">
+                    <option *ngFor="let d of dependencias" [ngValue]="d">{{d.nombre}}</option>
+                </select>
+            </div>
+            <div class="col-6 mb-4" id="item">
+                <label for="rol" class="form-label">Rol: </label>
+                <select name="rol" id="rol" class="form-select" [(ngModel)]="empleado.rol" required #rol="ngModel">
+                    <option value="administrador">Administrador</option>
+                    <option value="participante">Participante</option>
+                </select>
+            </div>
+        </div>
+        <button type="button" class="btn" (click)="altaEmpleado()" *ngIf="accion=='new'" [disabled]="form.invalid" routerLink="/principal/Administrador/gestionEmpleados">Registrar</button>
+        <button *ngIf="accion=='update'" (click)="actualizarEmpleado()" type="submit" class="btn btn-modificar" [disabled]="form.invalid" routerLink="/principal/Administrador/gestionEmpleados">ACTUALIZAR</button>
+        <button type="button" class="btn" (click)="resetForm(form)">Limpiar</button>
+    </form>
+</div>

@@ -1,0 +1,62 @@
+#card{
+    position: absolute;
+    background-color: rgba(0, 0, 0, .8);
+    top: 75%;
+    bottom: 0;
+    left: 0%;
+    right: 0%;
+}
+.container-fluid{
+    padding: 0px;
+    margin: 0px;
+}
+#header{
+    background-image: url('/assets/fondo-header.jpg');
+    background-size:cover;
+    height: 400px;
+    width: auto;
+    padding: 0px;
+ 
+}
+
+.mask{
+    background-color: rgba(0, 0, 0, 0);
+    width:auto;
+    height: 400px;
+    margin: 0px;
+}
+h2{
+    font-family: 'Readex Pro', sans-serif;
+    text-shadow: rgba(0, 0, 0, 0.6);
+    font-size: 40px;
+    color:#6200EA;
+}
+h1{
+    font-family: 'Readex Pro', sans-serif;
+    color:#ffffffed;
+    font-size: 70px;
+    margin-bottom: 10px;
+
+}
+h3{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color:rgba(246, 246, 246, 0.874) ;
+}
+.clearfix{
+    padding: 80px;
+    padding-bottom: 0px;
+    padding-top: 40px;
+}
+
+#flecha{
+    justify-content: center;
+    color:#6200EA;
+    text-align: center;
+    font-size: 50px;
+}
+p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color:rgb(56, 56, 56) ;
+}

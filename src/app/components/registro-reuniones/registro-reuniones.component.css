@@ -1,0 +1,134 @@
+.container-fluid{
+    padding:0px;
+    margin:0px;
+}
+#header{
+    background-image: url('/assets/fondo-header.jpg');
+    background-size:cover;
+    height: 300px;
+    width: auto;
+    padding: 0px;
+ 
+}
+
+.mask{
+    background-color: rgba(0, 0, 0, 0);
+    width:auto;
+    height: 400px;
+    margin: 0px;
+}
+h1{
+    font-family: 'Readex Pro', sans-serif;
+    color:#ffffffed;
+    font-size: 70px;
+    margin-bottom: 10px;
+
+}
+h3{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color:rgba(246, 246, 246, 0.874) ;
+}
+.clearfix{
+    padding: 80px;
+    padding-bottom: 0px;
+    padding-top: 40px;
+}
+
+#flecha{
+    justify-content: center;
+    color:#9e80f1;
+    text-align: center;
+    font-size: 30px;
+}
+
+p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color:rgb(56, 56, 56) ;
+}
+form{
+    width: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+    input:hover{
+        background: slateblue;
+        color: aliceblue;
+    }
+    
+    select:hover{
+        background: slateblue;
+        color: aliceblue;
+    }
+    #boton{
+        text-align: center;
+        margin-top: 15px;
+        width: 160px;
+        margin-left: 90px;
+    }
+    #botonb{
+        /* margin-left:250px; */
+        text-align: center;
+        margin-top: 15px;
+        width: 160px;
+         background-color: green;
+       
+    }
+    .btn-agregar:hover{
+        background-color: rgb(31, 215, 31);
+    }
+    .btn{
+        height: fit-content;
+        width: fit-content;
+        font-family: 'Readex Pro';
+        color: rgb(254, 254, 254);
+        margin: 5px;
+    }
+    
+   
+    
+    table{
+        border: #9e80f1 1px solid;
+        border-radius: 10px;
+    }
+    table th{
+        font-family: 'Readex Pro';
+        color: rgb(66, 79, 196);
+        border-bottom:rgb(66, 79, 196) 2px solid;
+    }
+.div-btn-agregar{
+    margin:10px;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    width: auto;
+}
+.btn-modificar{
+    text-align: center;
+    margin-top: 15px;
+    width: 160px;
+     background-color: rgb(94, 68, 223);
+}
+
+/* VALIDACIONES DE FECHA */
+
+input[type="number"] {
+    width: 100px;
+  }
+  
+  input + span {
+    padding-right: 30px;
+  }
+  
+  input:invalid+span:after {
+    position: absolute;
+    content: '✖';
+    padding-left: 5px;
+  }
+  
+  input:valid+span:after {
+    position: absolute;
+    content: '✓';
+    padding-left: 5px;
+  }

@@ -1,0 +1,51 @@
+<div id="header" class="text-center bg-image">
+    <div class="mask">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3">Gestion de empleados</h1>
+           <nav class="d-flex">
+            <h6 class="mb-0">
+              <a routerLink="/principal/Administrador" class="text-reset">Home</a>
+              <span>/</span>
+              <a routerLink="/principal/Administrador/gestionEmpleados" class="text-reset">Gestion Empleados</a>
+            </h6>
+          </nav>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="btns">
+  <button class="btn btn-agregar" (click)="altaEmpleado()">AGREGAR <i class="fa-solid fa-circle-plus"></i></button>
+</div>
+<div class="card ">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>N° Legajo</th>
+                <th>Nombre y Apellido</th>
+                <th>Dependencia</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Rol</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let e of empleados">
+                <td>{{e.legajo}}</td>
+                <td>{{e.nombre}} {{e.apellido}}</td>
+                <td>{{e.dependencia.nombre}}</td>
+                <td>{{e.email}}</td>
+                <td>{{e.username}}</td>
+                <td>{{e.rol}}</td>
+                <td *ngIf="e.estadoEmpleado==true">Activo</td>
+                <td *ngIf="e.estadoEmpleado==false">No activo</td>
+                <td>
+                  <button type="button" class="btn btn-borrar" (click)="borrarEmpleado(e)"><i class="fa-solid fa-trash"></i></button>
+                  <button type="button" class="btn btn-seleccionar" (click)="modificarEmpleado(e)"><i class="fa-solid fa-pen"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,63 @@
+<div id="header" class="text-center bg-image">
+        <div class="mask">
+          <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white">
+              <h1 class="mb-3">Estadisticas</h1>
+              <nav class="d-flex">
+              <h6 class="mb-0">
+                <a routerLink="/principal/Administrador" class="text-reset">Home</a>
+                  <span>/</span>
+                <a routerLink="/principal/Administrador/estadistica" class="text-reset">Estadisticas</a>
+              </h6>
+              </nav>
+            </div>
+          </div>
+        </div>
+</div>
+<div class="container-fluid" style="margin-bottom: 100px;">
+    
+    <div class="container-xl">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-12">
+                <h4>Graficos Por: </h4>
+                <button class="btn " (click)="oficinasGrafica()"> Oficina</button>
+                <button class="btn " (click)="mesGrafica()">Mes</button>
+                <button class="btn " (click)="anioGrafica()">Año</button>
+                <button class="btn " (click)="participanteGrafica()">Participante</button>
+                <button class="btn " (click)="tipoGrafica()">Tipo reunion</button>
+                <div class="mt-4" style="justify-content:center">
+                <label for="entrada">Desde: </label>
+                <input type="date" id="entrada" name="entrada" [(ngModel)]="entrada">
+                <label for="salida">Hasta:</label>
+                <input type="date" id="salida" name="salida" [(ngModel)]="salida">   
+                <button class="btn " (click)="fechasGrafica()">Por Periodo de Tiempo</button>
+
+                </div>                         
+            </div>
+
+        
+
+        <div class="row">
+
+       
+            <div class="col-6 col-md-6 mb-5">
+
+                    <h5>Grafico de Torta</h5>
+                    <div style="height:150px;width:70%">
+                        <canvas id="chartPie"></canvas>
+                    </div>
+
+            </div>  
+        
+            <div class="col-6 col-md-6  mb-5">
+
+                    <h5>Grafico de Barras</h5>
+                    <div style="height:100%;width:100%">
+                        <canvas id="bar"></canvas>
+                    </div>
+            </div>
+           
+        
+        </div>
+    </div>
+

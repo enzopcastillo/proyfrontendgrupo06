@@ -1,0 +1,67 @@
+.d-flex{
+    margin-left: 10px;
+}
+.navbar-brand{
+  font-family: 'Readex Pro', sans-serif;
+    color:#ffffffff;
+    font-size: 30px;
+}
+.nav-link{
+  font-family: 'Montserrat', bold;
+  color: #EDE7F6;
+}
+
+.navbar{
+  background-color: #6761e2ab;
+}
+.t{
+  font-family: 'Readex Pro', sans-serif;
+  background-color: #06ffeeb9;
+  color: #ffffff;
+}
+.dropdown ngx-avatar{
+  margin-right: 10px;
+  font-family: 'Readex Pro';
+}
+.dropdown strong{
+  font-family: 'Readex Pro', sans-serif;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.area{
+  width: 400px;
+  max-height: 500px;
+  font-size: 10px;
+  overflow: scroll;
+}
+
+.area strong{
+  color: black;
+  font-size: 15px;
+}
+
+.area p{
+  font-size: 15px;
+}
+
+.lead{
+  font-size: 15px;
+}
+
+.ic{
+  font-size: 30px;
+  color: gold;
+}
+
+.ic span{
+  font-size: 12px;
+}
+
+.b{
+  border-radius: 80%;
+  width: max-content;
+}
+.dropdown{
+  margin-right: 5px;
+}

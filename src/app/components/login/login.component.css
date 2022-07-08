@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.row {
+    
+    padding-top: 90px;
+    padding-bottom: 50px;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('/assets/fondo-header.jpg');
+
+   
+}
+
+.login {
+    width: 1000px;
+    height: min-content;
+    padding: 20px;
+    border-radius: 12px;
+    background:  #ffffff ;
+    opacity: 90%;
+}
+
+.login h1 {
+    font-size: 36px;
+    margin-bottom: 25px;
+    font-family: 'Readex Pro', sans-serif;
+    color:#2b06ffb9;
+}
+
+.login p {
+    font-size: 20px;
+    margin-bottom: 25px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+.login form {
+    font-family: 'Readex Pro', sans-serif;
+    font-size: 15px;
+    color: #575757;
+}
+
+.form-control{
+    padding: 10px;
+
+}
+.login form .form-group {
+    margin-bottom: 12px;
+}
+
+.login form input[type="submit"] {
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+#img-login img{
+    height: 400px;
+}
+
+#img-login p {
+    font-size: 15px;
+    margin-bottom: 25px;
+    font-family: 'Montserrat';
+    text-align: center;
+}
+#btns{
+    margin-top: 30px;
+    justify-content: center;
+    text-align: center;
+
+}
+.btn{
+    font-family: 'Readex Pro', sans-serif;
+  width: fit-content;
+    color: #ffffff;
+    background-color: rgb(108, 63, 255);
+    margin: 5px;
+}
+

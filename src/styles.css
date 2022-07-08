@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+/* angular-cli file: src/styles.css */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+.cal-month-view .cal-open-day-events {
+    color: #fff;
+    background-color: #8e78f1ba;;
+    box-shadow: none;
+}
+.cal-month-view .cal-day-badge {
+    background-color: #906ffd;
+    color: #fff;
+    
+}
+.cal-month-view .cal-day-number {
+    font-size: 1.2em;
+    font-weight: 400;
+    opacity: 0.5;
+    margin-top: 15px;
+    margin-right: 15px;
+    float: right;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+.cal-month-view .cal-event-title {
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+.cal-month-view .cal-header .cal-cell {
+    padding: 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    white-space: nowrap;
+    font-family: 'Montserrat', sans-serif;
+}
